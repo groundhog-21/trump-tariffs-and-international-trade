@@ -2,6 +2,8 @@
 
 An exploratory analysis of US goods imports following the CRISP-DM process.
 
+**Read the blog post on Medium:** [Did Trump's Tariffs Slow US Imports? What 19 Months Can Tell Us](https://medium.com/@agbrowne/did-trumps-tariffs-slow-us-imports-what-19-months-can-tell-us-a8e3fa2de37a)
+
 ## Research question
 
 Did Trump's second-term tariffs reduce US goods imports?
@@ -59,6 +61,24 @@ In the growth model, average YoY growth was 6.50% before January 2025 and 4.13% 
 
 **Conclusion:** The analysis does not provide robust evidence that Trump's second-term tariffs reduced imports. Results vary by specification, and the short second-term observation window limits inference. These findings are preliminary and do not establish either the presence or absence of a causal tariff effect.
 
+## Libraries used
+
+- pandas and NumPy: data preparation and numerical operations.
+- Matplotlib: charts of trade trends and model fits.
+- statsmodels: OLS regression with HAC standard errors.
+- SciPy: one-sided p-values.
+- Jupyter and ipykernel: notebook execution.
+
+Seaborn is included in the environment but is not used in the current analysis.
+
+## Supporting files
+
+- `requirements.txt`: Python dependencies.
+- `.gitignore`: excludes virtual environments, local datasets, and temporary files.
+- `data/README.md`: template for recording dataset provenance.
+- `src/`: reserved for reusable Python code.
+- `reports/figures/`: reserved for exported charts.
+
 ## Limitations
 
 - Only 19 second-term months are available, and monthly observations are dependent.
@@ -69,3 +89,10 @@ In the growth model, average YoY growth was 6.50% before January 2025 and 4.13% 
 - Model exploration and the directional hypothesis were informed by earlier results; the tests should be treated as exploratory.
 
 Preserve the notebooks and source snapshot, and revisit the analysis as additional observations become available.
+
+## Acknowledgments
+
+Trade data were provided by the US Census Bureau.
+This project was developed as part of my Udacity Data Science
+Nanodegree studies, with assistance from OpenAI Codex for coding,
+documentation, and discussion of statistical methods.
