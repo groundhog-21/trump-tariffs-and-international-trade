@@ -1,14 +1,18 @@
 # Trump Tariffs and International Trade
 
-An exploratory analysis of US goods imports following the CRISP-DM process.
+An exploratory analysis of US goods import growth, import levels, and the trade balance during Trump's second term, following the CRISP-DM process.
 
 **Read the blog post on Medium:** [Did Trump's Tariffs Slow US Imports? What 19 Months Can Tell Us](https://medium.com/@agbrowne/did-trumps-tariffs-slow-us-imports-what-19-months-can-tell-us-a8e3fa2de37a)
 
-## Research question
+## Research objective and questions
 
-Did Trump's second-term tariffs reduce US goods imports?
+Investigate whether the data support the proposition that Trump's second-term tariffs reduced US goods imports, and describe how the goods trade balance differed between periods.
 
-The models compare import growth or import levels during the second term with earlier observations. They describe associations; the presidential indicator does not isolate tariff effects.
+1. **Import growth:** Was average year-over-year import growth lower during Trump's second term than in the preceding period?
+2. **Import levels:** Were monthly import values lower during the second term after accounting for their long-term linear trend?
+3. **Trade balance:** How did the average monthly US goods trade balance differ between the second term and the preceding period?
+
+Questions 1 and 2 use regressions; Question 3 uses a descriptive comparison of period averages. These analyses describe associations and observed differences. The presidential indicator does not isolate tariff effects or establish what imports would have been without tariffs.
 
 ## Data source and scope
 
@@ -41,29 +45,31 @@ The repository includes the source CSV and the data directories. Run the prepara
 
 Run code cells from top to bottom, using the project root or `notebooks` as the working directory.
 
-1. [Business understanding](notebooks/business_understanding.ipynb): research objective, scope, and hypotheses.
+1. [Business understanding](notebooks/business_understanding.ipynb): the three investigative questions, scope, regression hypotheses, and descriptive comparison.
 2. [Data understanding and preparation](notebooks/data_understanding_and_preparation.ipynb): reads the source, selects goods-only records, explores trends, creates the indicator and YoY variables, and saves `data/processed/analysis_data.csv`.
-3. [Modeling and evaluation](notebooks/modeling_and_evaluation.ipynb): loads the prepared data, fits the regressions, and plots actual versus fitted values.
-4. [Deployment](notebooks/deployment.ipynb): records the final preliminary conclusion.
+3. [Modeling and evaluation](notebooks/modeling_and_evaluation.ipynb): answers Questions 1 and 2 with regressions and actual-versus-fitted charts, then answers Question 3 with a trade-balance table and interpretation. Shared functions handle regression fitting and plotting.
+4. [Deployment](notebooks/deployment.ipynb): summarizes the answers to all three questions and the limitations of the preliminary findings.
 
 Run the preparation notebook before the modeling notebook. The saved CSV lets each notebook use its own kernel session.
 
-## Models and findings
+## Analysis and findings
 
-The modeling notebook retains two OLS specifications. Both use the same 403 observations and HAC standard errors with 12 lags and a small-sample correction. The one-sided alternative is a negative second-term coefficient.
+All three comparisons use the same 403 complete monthly observations. For Questions 1 and 2, OLS regressions use HAC standard errors with 12 monthly lags and a small-sample correction. Each tests a negative second-term coefficient against a null of a nonnegative coefficient. Question 3 compares average monthly trade balances without a significance test.
 
-| Model | Estimated second-term difference | One-sided p-value for a reduction |
+### Questions 1 and 2: Import growth and levels
+
+| Question and model | Estimated second-term difference | One-sided p-value for a reduction |
 | --- | --- | --- |
-| YoY import growth, intercept and second-term dummy | -2.37 percentage points | 0.278 |
-| Import levels, linear monthly time trend and second-term dummy | +$23.89 billion per month relative to the fitted trend | 0.998 |
+| Q1: YoY import growth, intercept and second-term dummy | -2.37 percentage points | 0.278 |
+| Q2: Import levels, linear monthly time trend and second-term dummy | +$23.89 billion per month relative to the fitted trend | 0.998 |
 
 In the growth model, average YoY growth was 6.50% before January 2025 and 4.13% during the second term. The difference was not statistically significant. In the levels model, the positive difference was statistically significant on a two-sided test (p = 0.004), conditional on that specification.
 
-### Descriptive finding: goods trade balance
+### Question 3: Average monthly goods trade balance
 
 The average monthly goods trade deficit was **$54.30 billion** in January 1993–December 2024 and **$100.57 billion** in January 2025–July 2026, a **$46.27 billion larger average deficit per month** during the second term. This answers Question 3 using a descriptive comparison, without a significance test. Values are not inflation-adjusted, and the comparison does not control for the long-term scale of trade, exports, or other economic influences; it does not identify a causal tariff effect.
 
-**Conclusion:** The analysis does not provide robust evidence that Trump's second-term tariffs reduced imports. Results vary by specification, and the short second-term observation window limits inference. These findings are preliminary and do not establish either the presence or absence of a causal tariff effect.
+**Conclusion:** Import growth was lower on average but not significantly so; import levels were above the fitted linear trend; and the average nominal goods deficit was larger. These comparisons address different outcomes and do not provide robust evidence that Trump's second-term tariffs reduced imports. The short second-term observation window limits inference, and none of these findings establishes a causal tariff effect or proves that tariffs had no effect.
 
 ## Libraries used
 
@@ -77,17 +83,21 @@ Seaborn is included in the environment but is not used in the current analysis.
 
 ## Supporting files
 
+- [`BLOG_POST.md`](BLOG_POST.md): repository copy of the nontechnical article, including all three questions and findings.
+- `data/raw/FTD-mf.csv`: original Census source snapshot used in the analysis.
+- `data/processed/analysis_data.csv`: generated analysis table, recreated by the preparation notebook and not tracked in Git.
 - `requirements.txt`: Python dependencies.
-- `.gitignore`: excludes virtual environments, local datasets, and temporary files.
+- `.gitignore`: excludes virtual environments, generated datasets, other raw files, and temporary files; explicitly retains the source snapshot `data/raw/FTD-mf.csv`.
 - `data/README.md`: source snapshot provenance, coverage, and preparation details.
-- `src/`: reserved for reusable Python code.
-- `reports/figures/`: reserved for exported charts.
+- `src/`: reserved for future Python modules; the current analysis and reusable functions are contained in the notebooks.
+- `reports/figures/`: contains the blog header illustration and the import-growth table image.
 
 ## Limitations
 
 - Only 19 second-term months are available, and monthly observations are dependent.
 - The indicator measures presidential tenure, not tariff rates, coverage, or implementation dates. Anticipatory importing and later declines may offset each other in period averages.
-- Lower import growth is different from lower import levels. Dollar values also reflect prices, exchange rates, and demand.
+- Lower import growth is different from lower import levels. Dollar values are not inflation-adjusted and also reflect exchange rates and demand.
+- The descriptive trade-balance comparison contrasts 19 recent months with 384 earlier months without controlling for the increasing scale of trade or changes in exports. A larger nominal deficit alone does not establish a tariff effect.
 - The levels model assumes a single linear trend and does not include seasonal controls. HAC standard errors do not correct model misspecification.
 - Aggregate national data conceal country and product differences. Other policies and economic changes are not controlled for.
 - Model exploration and the directional hypothesis were informed by earlier results; the tests should be treated as exploratory.
