@@ -13,7 +13,7 @@ The models compare import growth or import levels during the second term with ea
 ## Data source and scope
 
 - **Publisher:** US Census Bureau, [International Trade](https://www.census.gov/foreign-trade/index.html).
-- **Local source file:** `data/raw/FTD-mf.csv`, a multi-section CSV containing metadata and observations.
+- **Included source snapshot:** [`data/raw/FTD-mf.csv`](data/raw/FTD-mf.csv), a multi-section CSV containing metadata and observations. No separate data download is required.
 - **Series selected:** US goods only, balance-of-payments basis (`cat_idx = 2`, `geo_idx = 1`, `is_adj = 0`). Goods and services combined are excluded.
 - **Measures:** imports, exports, and trade balance, in millions of US dollars. Values are not inflation-adjusted.
 - **Raw coverage:** January 1992-July 2026, with 415 complete monthly observations for these measures. The file states an update date of September 3, 2026.
@@ -33,9 +33,9 @@ py -3.12 -m venv .venv
 
 If the project's Python 3.12 environment already exists, run only the installation command. Open the project folder in VS Code, open a notebook, and select `.venv` as its Python kernel. VS Code's Python and Jupyter extensions are required for this workflow.
 
-Place the Census export at `data/raw/FTD-mf.csv`. The current parser expects its named sections, including `TIME PERIODS` and `DATA`; a differently formatted download will require adapting the ingestion code.
+Use the included `data/raw/FTD-mf.csv` snapshot to reproduce the reported results. The preparation notebook reads its named sections, including `TIME PERIODS` and `DATA`. See [data documentation](data/README.md) for provenance and preparation details.
 
-Create `data/raw` and `data/processed` if they are missing. Raw and processed datasets are excluded from Git, so a fresh checkout needs the source file before running the notebooks. Dependencies are currently unpinned.
+The repository includes the source CSV and the data directories. Run the preparation notebook to generate `data/processed/analysis_data.csv`, then run the modeling notebook. Generated datasets and other raw files remain excluded from Git. Dependencies are currently unpinned.
 
 ## Notebook order
 
@@ -75,7 +75,7 @@ Seaborn is included in the environment but is not used in the current analysis.
 
 - `requirements.txt`: Python dependencies.
 - `.gitignore`: excludes virtual environments, local datasets, and temporary files.
-- `data/README.md`: template for recording dataset provenance.
+- `data/README.md`: source snapshot provenance, coverage, and preparation details.
 - `src/`: reserved for reusable Python code.
 - `reports/figures/`: reserved for exported charts.
 

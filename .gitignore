@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 .venv/
@@ -11,9 +11,10 @@ venv/
 .env
 .env.*
 
-# Local datasets
+# Keep the analysis source snapshot; exclude other local datasets
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/FTD-mf.csv
 data/processed/*
 !data/processed/.gitkeep
 
