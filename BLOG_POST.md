@@ -10,12 +10,13 @@ The data tell a less decisive story. **Import growth was lower on average during
 
 ## What I wanted to find out
 
-The central question was whether imports were lower than they would have been without the tariffs. To explore it, I asked two more specific questions:
+The central question was whether imports were lower than they would have been without the tariffs. To explore it, I asked three specific questions:
 
 1. Was import growth lower during Trump's second term than in the preceding period?
 2. Were import values below their long-term upward trend?
+3. How did the average monthly US goods trade balance differ between the second term and the preceding period?
 
-I used US Census Bureau monthly data on goods imports. Services were excluded. The analysis covers January 1993 through July 2026: **403 months in total, but only 19 during the second term**.
+I used US Census Bureau monthly data on goods imports, exports, and the trade balance. Services were excluded. The analysis covers January 1993 through July 2026: **403 months in total, but only 19 during the second term**.
 
 I counted January 2025 as the start of the second-term period, including the whole month. That comparison includes months before the April tariff announcement, allowing room for businesses to bring purchases forward in anticipation. The earlier period includes Trump's first term.
 
@@ -43,6 +44,14 @@ That result does not show that tariffs increased imports. It shows why the bench
 
 The two comparisons therefore offer no consistent evidence that imports were lower during the second term.
 
+## What happened to the trade deficit?
+
+The United States runs a goods trade deficit when imports exceed exports. Before the second term, the average monthly deficit was **$54.30 billion**. During the second term, it was **$100.57 billion**—an average deficit **$46.27 billion larger per month**.
+
+Other things equal, lower imports would narrow the deficit if exports stayed unchanged. But this comparison does not hold exports or other economic conditions constant.
+
+The figures are not adjusted for inflation or the increasing scale of trade, and they compare 19 recent months with 384 earlier months. They describe a larger average dollar deficit; they do not establish that tariffs caused it or failed to reduce imports relative to what they otherwise would have been. This comparison is descriptive, without a statistical significance test.
+
 ## What can we conclude?
 
 **This analysis does not provide robust evidence that Trump's second-term tariffs reduced US goods imports. It also does not establish that tariffs had no effect.**
@@ -56,8 +65,8 @@ For now, the findings are preliminary. More observations will allow us to revisi
 ## Data and further reading
 
 - Data provider: [US Census Bureau, International Trade](https://www.census.gov/foreign-trade/index.html). The local extract contains observations through July 2026 and states an update date of September 3, 2026.
-- [Project overview and reproduction instructions](README.md).
-- [Data preparation notebook](notebooks/data_understanding_and_preparation.ipynb).
-- [Models, statistical results, and charts](notebooks/modeling_and_evaluation.ipynb).
+- [Project overview and reproduction instructions](https://github.com/groundhog-21/trump-tariffs-and-international-trade/blob/main/README.md).
+- [Data preparation notebook](https://github.com/groundhog-21/trump-tariffs-and-international-trade/blob/main/notebooks/data_understanding_and_preparation.ipynb).
+- [Models, statistical results, and charts](https://github.com/groundhog-21/trump-tariffs-and-international-trade/blob/main/notebooks/modeling_and_evaluation.ipynb).
 
 *Created as part of my Udacity Data Science Nanodegree studies, with OpenAI Codex assistance for coding, writing, and discussion of methods.*

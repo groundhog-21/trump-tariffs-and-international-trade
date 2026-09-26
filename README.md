@@ -59,6 +59,10 @@ The modeling notebook retains two OLS specifications. Both use the same 403 obse
 
 In the growth model, average YoY growth was 6.50% before January 2025 and 4.13% during the second term. The difference was not statistically significant. In the levels model, the positive difference was statistically significant on a two-sided test (p = 0.004), conditional on that specification.
 
+### Descriptive finding: goods trade balance
+
+The average monthly goods trade deficit was **$54.30 billion** in January 1993–December 2024 and **$100.57 billion** in January 2025–July 2026, a **$46.27 billion larger average deficit per month** during the second term. This answers Question 3 using a descriptive comparison, without a significance test. Values are not inflation-adjusted, and the comparison does not control for the long-term scale of trade, exports, or other economic influences; it does not identify a causal tariff effect.
+
 **Conclusion:** The analysis does not provide robust evidence that Trump's second-term tariffs reduced imports. Results vary by specification, and the short second-term observation window limits inference. These findings are preliminary and do not establish either the presence or absence of a causal tariff effect.
 
 ## Libraries used
