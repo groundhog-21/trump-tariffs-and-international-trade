@@ -106,7 +106,9 @@ Preserve the notebooks and source snapshot, and revisit the analysis as addition
 
 ## Acknowledgments
 
-Trade data were provided by the US Census Bureau.
 This project was developed as part of my Udacity Data Science
-Nanodegree studies, with assistance from OpenAI Codex for coding,
-documentation, and discussion of statistical methods.
+Nanodegree studies. 
+
+Trade data were provided by the US Census Bureau. 
+
+**AI assistance disclosure:** I used OpenAI’s ChatGPT/Codex to support concept development, research-question refinement, coding and debugging, statistical analysis and interpretation, validation, and preparation of documentation and blog content. AI assistance also supported visualization creation, including the generated header illustration. I reviewed and edited the resulting work and take responsibility for the final submission and its conclusions.
