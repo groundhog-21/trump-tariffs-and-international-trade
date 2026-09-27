@@ -43,6 +43,8 @@ The repository includes the source CSV and the data directories. Run the prepara
 
 ## Notebook order
 
+Each notebook contains explicitly numbered CRISP-DM stage headings: **1. Business Understanding**, **2. Data Understanding**, **3. Data Preparation**, **4. Modeling**, **5. Evaluation**, and **6. Deployment**. The business-understanding notebook includes a stage-by-stage navigation map.
+
 Run code cells from top to bottom, using the project root or `notebooks` as the working directory.
 
 1. [Business understanding](notebooks/business_understanding.ipynb): the three investigative questions, scope, regression hypotheses, and descriptive comparison.
@@ -89,8 +91,8 @@ Seaborn is included in the environment but is not used in the current analysis.
 - `requirements.txt`: Python dependencies.
 - `.gitignore`: excludes virtual environments, generated datasets, other raw files, and temporary files; explicitly retains the source snapshot `data/raw/FTD-mf.csv`.
 - `data/README.md`: source snapshot provenance, coverage, and preparation details.
-- `src/`: reserved for future Python modules; the current analysis and reusable functions are contained in the notebooks.
-- `reports/figures/`: contains the blog header illustration and the import-growth table image.
+- `src/create_blog_figures.py`: recreates the three question-specific blog charts from the prepared data. Run `.\.venv\Scripts\python.exe src/create_blog_figures.py` after the preparation notebook.
+- `reports/figures/`: contains the blog header illustration, import-growth table image, and three question-specific charts.
 
 ## Limitations
 

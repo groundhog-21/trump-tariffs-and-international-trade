@@ -20,7 +20,13 @@ I used US Census Bureau monthly data on goods imports, exports, and the trade ba
 
 I counted January 2025 as the start of the second-term period, including the whole month. That comparison includes months before the April tariff announcement, allowing room for businesses to bring purchases forward in anticipation. The earlier period includes Trump's first term.
 
-## Growth slowed, but the evidence is uncertain
+## Question 1: Was import growth lower during the second term?
+
+**Hypothesis:** Average year-over-year import growth was lower than in the earlier period.
+
+![Average year-over-year import growth: 6.50% in the earlier period and 4.13% in the second term.](reports/figures/q1-import-growth.png)
+
+*Figure 1. The bars show lower average growth, but the uncertainty interval for the difference includes both decreases and increases. The directional test does not provide sufficient evidence to support the hypothesis (one-sided p = 0.278).*
 
 To compare growth, I measured each month's imports against the same month one year earlier.
 
@@ -36,7 +42,13 @@ Growth was lower by 2.37 percentage points. However, the uncertainty around that
 
 Slower growth also does not mean imports fell. A positive growth rate means imports were higher than a year earlier; they were simply increasing more slowly on average.
 
-## Import values tell another part of the story
+## Question 2: Were import values below their long-term linear trend?
+
+**Hypothesis:** Second-term monthly imports were below the fitted linear trend.
+
+![Second-term import difference relative to a linear trend: plus 23.89 billion dollars per month, with a 95% confidence interval from plus 7.80 to plus 39.98 billion.](reports/figures/q2-import-levels.png)
+
+*Figure 2. The dot is the estimated second-term difference, and the horizontal line is its 95% confidence interval. Both are above zero, so this model does not support the hypothesis of lower imports (one-sided p = 0.998). This is a fitted association, not an estimate of what would have happened without tariffs.*
 
 I also compared monthly import values with a straight-line historical trend. On that benchmark, second-term imports were approximately **$23.9 billion per month above the fitted trend**, rather than below it.
 
@@ -44,7 +56,13 @@ That result does not show that tariffs increased imports. It shows why the bench
 
 The two comparisons therefore offer no consistent evidence that imports were lower during the second term.
 
-## What happened to the trade deficit?
+## Question 3: How did the average monthly goods trade balance differ?
+
+**Descriptive expectation:** If imports fell while exports stayed unchanged, the trade deficit would narrow. This comparison checks the observed direction; it is not a formal hypothesis test and does not hold exports constant.
+
+![Average monthly goods trade balance: minus 54.30 billion dollars before the second term and minus 100.57 billion during it.](reports/figures/q3-trade-balance.png)
+
+*Figure 3. The second-term bar extends farther below zero, showing a larger average deficit, rather than the narrowing in the stated expectation. Unequal period lengths and nominal dollar values limit this comparison; no statistical significance or causal effect is inferred.*
 
 The United States runs a goods trade deficit when imports exceed exports. Before the second term, the average monthly deficit was **$54.30 billion**. During the second term, it was **$100.57 billion**—an average deficit **$46.27 billion larger per month**.
 
