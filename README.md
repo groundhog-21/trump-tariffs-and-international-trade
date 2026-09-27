@@ -26,6 +26,16 @@ Questions 1 and 2 use regressions; Question 3 uses a descriptive comparison of p
 
 The exact export URL and download date have not yet been recorded. The source's update date is not the download date. Census estimates may be revised.
 
+## Data preparation decisions
+
+The [preparation notebook](notebooks/data_understanding_and_preparation.ipynb) reports missing counts and percentages before exclusions, checks numeric conversions and date joins, and checks for absent calendar months. All **415 selected source months are complete**: no source measurements are dropped or imputed. Unexpected missing measurements stop execution for investigation.
+
+The first **12 months (January–December 1992; 2.89% of the source sample)** have undefined year-over-year measures because the preceding year is unavailable. These months are excluded rather than filled with invented growth values. This removes 12 of 396 earlier-period months and none of the 19 second-term months. All three questions use the resulting 403-month sample for comparability, although the levels and balance analyses could use 1992.
+
+A sensitivity check in the preparation notebook compares the trade-balance result across these sample windows. The average deficit widens by **$47.67 billion per month** using all 415 months and by **$46.27 billion** using the common sample. The direction is unchanged, but the baseline affects the magnitude. This check does not establish that the import-level regression is insensitive to its sample window.
+
+Source category codes select and reshape the series; they are not treated as continuous regression predictors. The second-term category uses one **0/1 indicator**, with the earlier period as the reference group and an intercept in each regression. A second dummy would be redundant. The notebook documents these choices and distinguishes the period indicator from tariff exposure.
+
 ## Setup
 
 Use Python 3.12. From the project root, run these commands in PowerShell:
@@ -43,16 +53,36 @@ The repository includes the source CSV and the data directories. Run the prepara
 
 ## Notebook order
 
-Each notebook contains explicitly numbered CRISP-DM stage headings: **1. Business Understanding**, **2. Data Understanding**, **3. Data Preparation**, **4. Modeling**, **5. Evaluation**, and **6. Deployment**. The business-understanding notebook includes a stage-by-stage navigation map.
+Across the four notebooks, explicitly numbered headings identify the six CRISP-DM stages: **1. Business Understanding**, **2. Data Understanding**, **3. Data Preparation**, **4. Modeling**, **5. Evaluation**, and **6. Deployment**. The business-understanding notebook includes a stage-by-stage navigation map.
 
 Run code cells from top to bottom, using the project root or `notebooks` as the working directory.
 
 1. [Business understanding](notebooks/business_understanding.ipynb): the three investigative questions, scope, regression hypotheses, and descriptive comparison.
-2. [Data understanding and preparation](notebooks/data_understanding_and_preparation.ipynb): reads the source, selects goods-only records, explores trends, creates the indicator and YoY variables, and saves `data/processed/analysis_data.csv`.
-3. [Modeling and evaluation](notebooks/modeling_and_evaluation.ipynb): answers Questions 1 and 2 with regressions and actual-versus-fitted charts, then answers Question 3 with a trade-balance table and interpretation. Shared functions handle regression fitting and plotting.
-4. [Deployment](notebooks/deployment.ipynb): summarizes the answers to all three questions and the limitations of the preliminary findings.
+2. [Data understanding and preparation](notebooks/data_understanding_and_preparation.ipynb): covers stages 2–3: gathers and assesses the source, audits missingness, selects goods-only records, visualizes trends, explains categorical encoding, constructs YoY variables, checks sample sensitivity, and saves `data/processed/analysis_data.csv`.
+3. [Modeling and evaluation](notebooks/modeling_and_evaluation.ipynb): covers stages 4–5: fits the two regressions in Modeling, then presents question-by-question charts, the descriptive trade-balance table, and interpretations in Evaluation. Shared functions handle regression fitting and plotting.
+4. [Deployment](notebooks/deployment.ipynb): covers stage 6: summarizes all three answers and limitations, and links to the blog for communication to stakeholders.
 
 Run the preparation notebook before the modeling notebook. The saved CSV lets each notebook use its own kernel session.
+
+## Blog visuals and reproduction
+
+The [repository blog post](BLOG_POST.md) pairs each business question with a hypothesis or descriptive expectation, a labeled visual, and an explanation of what the evidence supports.
+
+| Question | Supporting chart |
+| --- | --- |
+| Q1: Import growth | [Average year-over-year growth by period](reports/figures/q1-import-growth.png), with uncertainty for the difference stated in the chart note. |
+| Q2: Import levels | [Estimated second-term difference and 95% confidence interval](reports/figures/q2-import-levels.png), relative to the fitted linear trend. |
+| Q3: Trade balance | [Average monthly balance by period](reports/figures/q3-trade-balance.png), shown as signed values; this comparison is descriptive. |
+
+After running the preparation notebook, regenerate the three PNG figures from the project root:
+
+```powershell
+.\.venv\Scripts\python.exe src/create_blog_figures.py
+```
+
+The script reads `data/processed/analysis_data.csv`, refits the import-level model for its confidence interval, and writes the images to `reports/figures/`. It is designed for the included 403-month snapshot: some annotations and period labels are fixed to this analysis and must be reviewed if the data change.
+
+`BLOG_POST.md` and its charts are the repository version of the article. Changes to these files do not automatically update the Medium article; its text and images must be updated separately.
 
 ## Analysis and findings
 
@@ -76,7 +106,7 @@ The average monthly goods trade deficit was **$54.30 billion** in January 1993�
 ## Libraries used
 
 - pandas and NumPy: data preparation and numerical operations.
-- Matplotlib: charts of trade trends and model fits.
+- Matplotlib: charts of trade trends, model fits, and the three blog findings.
 - statsmodels: OLS regression with HAC standard errors.
 - SciPy: one-sided p-values.
 - Jupyter and ipykernel: notebook execution.
@@ -85,7 +115,7 @@ Seaborn is included in the environment but is not used in the current analysis.
 
 ## Supporting files
 
-- [`BLOG_POST.md`](BLOG_POST.md): repository copy of the nontechnical article, including all three questions and findings.
+- [`BLOG_POST.md`](BLOG_POST.md): repository copy of the nontechnical article, including all three questions, supporting charts, and interpretations.
 - `data/raw/FTD-mf.csv`: original Census source snapshot used in the analysis.
 - `data/processed/analysis_data.csv`: generated analysis table, recreated by the preparation notebook and not tracked in Git.
 - `requirements.txt`: Python dependencies.
